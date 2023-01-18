@@ -2,8 +2,8 @@
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { navigate } from '@/helpers/navigate';
-import { useAuthStore } from '@/stores/authStore';
 import router from '@/router';
+import { useAuthStore } from '@/stores/authStore';
 
 const auth = useAuthStore();
 

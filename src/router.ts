@@ -1,3 +1,4 @@
+import { nextTick } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import { useAuthStore } from '@/stores/authStore';
 import Dashboard from '@/components/Dashboard.vue';
@@ -9,18 +10,25 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    alias: '/home'
+    alias: '/home',
+    meta: {
+      title: 'Home'
+    }
   },
   {
     path: '/login',
     name: 'Login',
     component: Login,
+    meta: {
+      title: 'Login',
+    }
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
     meta: {
+      title: 'Dashboard',
       requiresAuth: true,
     }
   },
@@ -43,5 +51,12 @@ router.beforeEach((to) => {
     }
   }
 });
+
+router.afterEach((to) => {
+
+  nextTick(() => {
+    document.title = `Taters | ${to.meta.title}`
+  })
+})
 
 export default router;
