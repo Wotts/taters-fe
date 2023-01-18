@@ -18,11 +18,9 @@ const logMeIn = (): void => {
   if (loginSuccessful) {
     const redirect = route.query.redirect;
 
-    if (typeof redirect === 'string') {
-      router.push(redirect);
-    } else {
-      navigate('Home');
-    }
+    typeof redirect === 'string'
+      ? router.push(redirect)
+      : navigate('Home');
   }
 }
 </script>
