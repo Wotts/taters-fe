@@ -27,16 +27,20 @@ const logMeIn = (): void => {
 </script>
 
 <template>
-  <input
-    v-model="username"
-    placeholder="username"
-    @keyup.enter="logMeIn"
-  />
-  <input
-    v-model="password"
-    placeholder="password"
-    type="password"
-    @keyup.enter="logMeIn"
-  />
-  <button @click="logMeIn">Login</button>
+  <div class="column">
+    <input
+      v-model="username"
+      placeholder="username"
+      @keyup.enter="logMeIn"
+    />
+    <input
+      v-model="password"
+      placeholder="password"
+      type="password"
+      @keyup.enter="logMeIn"
+    />
+    <button @click="logMeIn">Login</button>
+    <button v-if="auth.isAuthenticated()" @click="auth.logout()">Logout</button>
+    <button @click="router.push({name: 'Home'})">Home</button>
+  </div>
 </template>
