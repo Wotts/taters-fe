@@ -1,13 +1,29 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRoute } from 'vue-router';
 import { useAuthStore } from '@/stores/authStore';
+import router from '@/router';
 
 const auth = useAuthStore();
 
-const username = ref<string>("");
-const password = ref<string>("");
+const route = useRoute();
 
-const logMeIn = (): boolean => auth.login(username.value, password.value);
+const username = ref("");
+const password = ref("");
+
+const logMeIn = (): void => {
+  const loginSuccessful = auth.login(username.value, password.value);
+
+  if (loginSuccessful) {
+    const redirect = route.query.redirect;
+
+    if (typeof redirect === 'string') {
+      router.push(redirect);
+    } else {
+      router.push({name: 'Home'});
+    }
+  }
+}
 </script>
 
 <template>
