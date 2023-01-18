@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
+import { navigate } from '@/helpers/navigate';
 import { useAuthStore } from '@/stores/authStore';
 import router from '@/router';
 
@@ -20,7 +21,7 @@ const logMeIn = (): void => {
     if (typeof redirect === 'string') {
       router.push(redirect);
     } else {
-      router.push({name: 'Home'});
+      navigate('Home');
     }
   }
 }
@@ -41,6 +42,6 @@ const logMeIn = (): void => {
     />
     <button @click="logMeIn">Login</button>
     <button v-if="auth.isAuthenticated()" @click="auth.logout()">Logout</button>
-    <button @click="router.push({name: 'Home'})">Home</button>
+    <button @click="navigate('Home')">Home</button>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { navigate } from '@/helpers/navigate';
 import { useAuthStore } from '@/stores/authStore';
-import router from '@/router';
 
 const auth = useAuthStore();
 </script>
@@ -11,7 +11,7 @@ const auth = useAuthStore();
     <p>You've peeled 63719812 potatoes this week.</p>
     <p>That's not enough, Robert.</p>
     <p>You still have 36280188 potatoes to go.</p>
-    <button @click="router.push({name: 'Home'})">Home</button>
+    <button @click="navigate('Home')">Home</button>
     <button @click="auth.logout()">Logout</button>
   </div>
 </template>

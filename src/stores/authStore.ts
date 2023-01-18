@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { useStorage } from '@vueuse/core';
 import { Authorization } from '@/enums/auth';
-import router from "@/router";
+import { navigate } from "@/helpers/navigate";
 
 export const useAuthStore = defineStore('auth', () => {
   const authState = useStorage('authenticated', false);
@@ -23,7 +23,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const logout = (): void => {
     authState.value = false;
-    router.push({ name: 'Home'});
+    navigate('Home');
   }
 
   return { isAuthenticated, login, logout };
