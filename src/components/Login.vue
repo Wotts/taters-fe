@@ -12,6 +12,8 @@ const route = useRoute();
 const username = ref("");
 const password = ref("");
 
+const showError = ref(false);
+
 const logMeIn = (): void => {
   const loginSuccessful = auth.login(username.value, password.value);
 
@@ -21,6 +23,8 @@ const logMeIn = (): void => {
     typeof redirect === 'string'
       ? router.push(redirect)
       : navigate('Home');
+  } else {
+    showError.value = true;
   }
 }
 </script>
@@ -38,6 +42,7 @@ const logMeIn = (): void => {
       type="password"
       @keyup.enter="logMeIn"
     />
+    <p v-if="showError">That's wrong.</p>
     <button @click="logMeIn">Login</button>
     <button v-if="auth.isAuthenticated()" @click="auth.logout()">Logout</button>
     <button @click="navigate('Home')">Home</button>

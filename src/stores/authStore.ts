@@ -16,9 +16,10 @@ export const useAuthStore = defineStore('auth', () => {
       password === Authorization.password
     ) {
       authState.value = true;
+      return true;
     }
 
-    return authState.value;
+    return false;
   }
 
   const logout = (): void => {
